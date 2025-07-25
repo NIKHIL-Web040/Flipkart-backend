@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const Product = require("./models");
+
 const app = express();
 app.use(cors());
 
@@ -22,7 +24,7 @@ mongoose
   });
 app.get("/products", async (req, res) => {
   try {
-    const products = await products.find();
+    const products = await Product.find();
     res.json(products);
   } catch (error) {
     res
@@ -32,7 +34,7 @@ app.get("/products", async (req, res) => {
 });
 app.get("/product/:id", async (req, res) => {
   try {
-    const products = await products.findById(req.params.id);
+    const products = await Product.findById(req.params.id);
     if (!products) {
       return res
         .status(404)

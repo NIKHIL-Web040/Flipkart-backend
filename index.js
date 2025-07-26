@@ -6,6 +6,7 @@ const { Product } = require("./models");
 
 const app = express();
 app.use(cors());
+app.use(express.json()); 
 
 const { router: authRoutes, authenticateJWT } = require("./auth");
 const cartRoutes = require("./cart");

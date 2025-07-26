@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const app=express();
+app.use(express.json()); 
 const { User } = require("./models/index");
 const router = express.Router();
 

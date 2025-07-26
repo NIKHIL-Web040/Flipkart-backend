@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const { Cart } = require("./models/index");
+const app = express();
+app.use(express.json());
 const router = express.Router();
 
 router.post("/cart/add", async (req, res) => {

@@ -1,12 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const bodyParser = require("body-parser");
 const { Product } = require("./models");
 
 const app = express();
+app.use(express.json());
 app.use(cors());
-app.use(express.json()); 
 
 const { router: authRoutes, authenticateJWT } = require("./auth");
 const cartRoutes = require("./cart");

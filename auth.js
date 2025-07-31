@@ -18,7 +18,14 @@ router.post("/auth/signup", async (req, res) => {
   const user = new User({ email, password: hashedPassword });
   await user.save();
   const token = jwt.sign({ userId: user._id }, "secret", { expiresIn: "1h" });
-  res.status(200).json({ token });
+  res.status(200).json({ 
+    token,
+    user: {
+      _id: user._id,
+      email: user.email
+    }
+  });
+  
 });
 
 //Login route
@@ -28,7 +35,13 @@ router.post("/auth/login", async (req, res) => {
   const isMatch = await bcrypt.compare(password, user.password);
   if (user && isMatch) {
     const token = jwt.sign({ userId: user._id }, "secret", { expiresIn: "1h" });
-    res.status(200).json({ token }); 
+    res.status(200).json({ 
+      token, 
+      user: { 
+        _id: user._id, 
+        email: user.email 
+      } 
+    });
   } else {
     res.status(400).json({ error: "Invalid Credentials" });
   }
